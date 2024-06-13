@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:02:44 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 10:00:38 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:06:26 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,21 @@ void	*philo_1(void *data)
 	return (NULL);
 }
 
+void	simulation_utils(t_table *table)
+{
+	int	i;
+	t_philo	*philo;
+	t_philo	*p;
+
+	philo = *(table->philos);
+	i = -1;
+	while (++i < table->philo_nbr && philo)
+	{
+		p = philo;
+		pthread_create(&philo->philo, NULL, philo_routine, p);
+		philo = philo->next;
+	}	
+}
 
 void	start_simulation(t_table *table)
 {
@@ -126,20 +141,12 @@ void	start_simulation(t_table *table)
 	t_philo	*philo;
 	t_philo	*p;
 
-	i = -1;
 	philo = *(table->philos);
 	p = philo;
 	if (table->philo_nbr == 1)
 		pthread_create(&philo->philo, NULL, philo_1, p);
 	else
-	{
-		while (++i < table->philo_nbr && philo)
-		{
-			p = philo;
-			pthread_create(&philo->philo, NULL, philo_routine, p);
-			philo = philo->next;
-		}
-	}
+		simulation_utils(table);
 	pthread_create(&table->monitor, NULL, waiter_routine, table);
 	table->start = get_time(table);
 	set_var(&table->m_table, &table->ready, 1);
