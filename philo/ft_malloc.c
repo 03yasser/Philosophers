@@ -6,32 +6,11 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:00:41 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/08 20:00:55 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:25:00 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-char	*ft_strdup(char *str, t_free **ptrs)
-{
-	char	*dest;
-	size_t	srclen;
-	size_t	i;
-
-	if (!str)
-		return (NULL);
-	srclen = ft_strlen(str);
-	dest = ft_malloc(ptrs, srclen + 1);
-	i = 0;
-	while (str[i])
-	{
-		dest[i] = str[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 
 void	ft_lstadd_back_aloc(t_free **list_aloc, t_free *new)
 {

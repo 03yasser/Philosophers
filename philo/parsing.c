@@ -6,10 +6,9 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:46:03 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 09:32:43 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:22:06 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "philo.h"
 
@@ -74,7 +73,6 @@ char	*trim_str(char *str, t_free **alloc)
 	return (result);
 }
 
-
 int	ft_atoi(char *str, t_free **alloc)
 {
 	int		i;
@@ -93,7 +91,7 @@ int	ft_atoi(char *str, t_free **alloc)
 	while (trimed_str[i])
 	{
 		if (ft_isdigit(trimed_str[i]))
-			error1("wrong input\n", alloc);	
+			error1("wrong input\n", alloc);
 		n = (n * 10) + (trimed_str[i] - 48);
 		if (n < 0)
 			error1("wrong input\n", alloc);
@@ -120,7 +118,7 @@ int	input_pars(t_table **table, char **argv, t_free **alloc)
 		return (1);
 	if (argv[5] == NULL)
 		(*table)->limit_meals = -1;
-	else 
+	else
 		(*table)->limit_meals = ft_atoi(argv[5], alloc);
 	if ((*table)->limit_meals == 0)
 		return (1);

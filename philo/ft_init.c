@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 11:12:58 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 09:24:24 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:26:33 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_philo	**create_philos(t_free **alloc, t_table *table)
 	t_philo		**philos;
 	t_philo		*philo;
 
-	philos = ft_malloc(alloc, sizeof(t_philo**));
+	philos = ft_malloc(alloc, sizeof(t_philo **));
 	*philos = NULL;
 	i = 0;
 	while (i < table->philo_nbr)
@@ -42,7 +42,6 @@ t_philo	**create_philos(t_free **alloc, t_table *table)
 
 void	data_init(t_table *table, t_free **alloc)
 {
-
 	table->end = 0;
 	table->ready = 0;
 	table->threads_runing = 0;

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean.c                                         :+:      :+:    :+:   */
+/*   mutex_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 16:15:12 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/10 18:25:40 by yboutsli         ###   ########.fr       */
+/*   Created: 2024/06/09 18:57:20 by yboutsli          #+#    #+#             */
+/*   Updated: 2024/06/13 10:22:21 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_clean(t_table **table)
+void	set_var(pthread_mutex_t *mutex, int *dest, int value)
 {
-	t_philo	*philo;
-	int	i;
+	pthread_mutex_lock(mutex);
+	*dest = value;
+	pthread_mutex_unlock(mutex);
+}
 
-	philo = *(*table)->philos;
-	i = -1;
-	while (++i < (*table)->philo_nbr)
-	{
-		pthread_mutex_destroy(&philo->m_philo);
-		pthread_mutex_destroy(&philo->m_fork);
-		philo = philo->next;
-	}
-	pthread_mutex_destroy(&(*table)->m_table);
-	pthread_mutex_destroy(&(*table)->m_write);
+int	get_var(pthread_mutex_t *mutex, int *value)
+{
+	int	ret;
+
+	pthread_mutex_lock(mutex);
+	ret = *value;
+	pthread_mutex_unlock(mutex);
+	return (ret);
 }

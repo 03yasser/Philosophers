@@ -1,5 +1,5 @@
 SRCS = parsing.c main.c ft_malloc.c ft_lst.c philo_utils.c mutex_func.c ft_libft.c ft_init.c \
-		simulation.c ft_clean.c
+		simulation.c simulation_1.c
 CFLAGS =  -Wall -Wextra -Werror -fsanitize=thread
 O_SRCS = $(addprefix object_files/,$(SRCS:.c=.o))
 

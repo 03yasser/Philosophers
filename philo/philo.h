@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:46:42 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 09:33:41 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/13 10:25:24 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_free
 	struct s_free	*next;
 }	t_free;
 
-
 typedef struct s_philo
 {
 	pthread_t			philo;
@@ -36,11 +35,11 @@ typedef struct s_philo
 	int					fork_locked;
 	int					full;
 	size_t				last_eat;
-	struct	s_table		*table;
-	struct	s_philo		*next;
+	struct s_table		*table;
+	struct s_philo		*next;
 }				t_philo;
 
-typedef struct	s_table
+typedef struct s_table
 {
 	int				t_to_die;
 	int				t_to_eat;
@@ -82,4 +81,6 @@ void	start_simulation(t_table *table);
 void	ft_clean(t_table **table);
 int		ft_strcmp(const char *s1, const char *s2);
 void	write_status(char *str, t_philo *philo, t_table *table);
+void	*waiter_routine(void *data);
+char	*ft_strdup(char *str, t_free **ptrs);
 #endif
