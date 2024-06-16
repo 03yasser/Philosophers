@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:24:04 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 15:59:00 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/16 11:44:43 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	get_time(t_table *table)
 
 	if (gettimeofday(&tv, NULL))
 	{
-		error2("gettimeofday failure", table);
+		// error2("gettimeofday failure", table);
 		return (0);
 	}
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));

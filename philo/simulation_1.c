@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 10:13:42 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 10:17:47 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/15 08:46:11 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	waiter_utils(int *philo_full, t_table *table)
 			return (1);
 		}
 		philo = philo->next;
+		usleep(100);
 	}
 	return (0);
 }

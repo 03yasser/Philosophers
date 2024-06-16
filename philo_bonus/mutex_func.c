@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   mutex_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/08 17:24:04 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 15:59:00 by yboutsli         ###   ########.fr       */
+/*   Created: 2024/06/09 18:57:20 by yboutsli          #+#    #+#             */
+/*   Updated: 2024/06/15 08:57:00 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	get_time(t_table *table)
+void	set_var(sem_t *s, int *dest, int value)
 {
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL))
-	{
-		error2("gettimeofday failure", table);
-		return (0);
-	}
-	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	sem_wait(s);
+	*dest = value;
+	sem_post(s);
 }
 
-int	ft_usleep(size_t milliseconds, t_table *table)
+int	get_var(sem_t *s, int *value)
 {
-	size_t	start;
+	int	ret;
 
-	start = get_time(table);
-	while ((get_time(table) - start) < milliseconds)
-		usleep(500);
-	return (0);
+	sem_wait(s);
+	ret = *value;
+	sem_post(s);
+	return (ret);
 }

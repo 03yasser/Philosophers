@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:46:42 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/15 08:46:03 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/16 14:09:06 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 typedef struct s_free
 {
@@ -28,11 +30,11 @@ typedef struct s_free
 typedef struct s_philo
 {
 	pthread_t			philo;
-	pthread_mutex_t		m_fork;
-	pthread_mutex_t		m_philo;
+	sem_t				*s_philo;
 	int					id;
 	int					meals_counter;
 	int					full;
+	int					end;
 	size_t				last_eat;
 	struct s_table		*table;
 	struct s_philo		*next;
@@ -45,14 +47,14 @@ typedef struct s_table
 	int				t_to_sleep;
 	int				limit_meals;
 	int				philo_nbr;
-	int				ready;
-	int				end;
 	size_t			start;
 	t_free			**alloc;
-	pthread_t		monitor;
-	t_philo			**philos;
-	pthread_mutex_t	m_table;
-	pthread_mutex_t	m_write;
+	sem_t			*s_table;
+	sem_t			*s_ready;
+	sem_t			*s_forks;
+	sem_t			*s_end;
+	sem_t			*s_write;
+	t_philo			*philo;
 }				t_table;
 
 int		ft_strlen(char *s);
@@ -66,19 +68,21 @@ void	ft_free_all(t_free **list_aloc);
 char	*ft_strdup(char *str, t_free **alloc);
 int		ft_strlen(char *s);
 void	error1(char *msg, t_free **list_aloc);
-void	error2(char *msg, t_table *table);
+void	error2(char *msg, t_table table);
 void	ft_free_ptr(t_free **list_aloc, void *ptr);
 void	ft_lstadd_back(t_philo **lst, t_philo *new_node);
 size_t	get_time(t_table *table);
-int		get_var(pthread_mutex_t *mutex, int *value);
-void	set_var(pthread_mutex_t *mutex, int *dest, int value);
+int     get_var(sem_t *s, int *value);
+void	set_var(sem_t *s, int *dest, int value);
 void	ft_putstr_fd(char *s, int fd);
 void	data_init(t_table *table, t_free **alloc);
-int		input_pars(t_table **table, char **argv, t_free **alloc);
+t_table *input(char **argv, t_free **alloc);
 void	start_simulation(t_table *table);
-void	ft_clean(t_table **table);
+void	ft_clean(t_table *table);
 int		ft_strcmp(const char *s1, const char *s2);
 void	write_status(char *str, t_philo *philo, t_table *table);
 void	*waiter_routine(void *data);
 char	*ft_strdup(char *str, t_free **ptrs);
+int		check_input(t_table *table);
+t_philo	*create_philo(t_free **alloc);
 #endif
