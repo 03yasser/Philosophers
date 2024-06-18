@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 16:15:27 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 10:22:42 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:34:30 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	main(int ac, char **argv)
 	if (ac < 5 || ac > 6)
 		return (ft_putstr_fd("wrong number of arguments\n", 2), 1);
 	alloc = NULL;
-	table = NULL;
-	if (input_pars(&table, argv, &alloc))
+	table = input(argv, &alloc);
+	if (check_input(table))
 	{
 		error1("wrong input", &alloc);
 		return (1);

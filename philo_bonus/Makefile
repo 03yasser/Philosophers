@@ -1,6 +1,6 @@
-SRCS = parsing.c main.c ft_malloc.c ft_lst.c philo_utils.c mutex_func.c ft_libft.c ft_init.c \
-		simulation.c simulation_1.c
-CFLAGS =  -fsanitize=thread -g
+SRCS = parsing.c main.c ft_malloc.c ft_lst.c philo_utils.c ft_libft.c ft_init.c \
+		simulation.c
+CFLAGS = -Wall -Wextra -Werror
 O_SRCS = $(addprefix object_files/,$(SRCS:.c=.o))
 
 NAME = philo_bonus 

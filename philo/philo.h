@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:46:42 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/15 08:46:03 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:33:58 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int		get_var(pthread_mutex_t *mutex, int *value);
 void	set_var(pthread_mutex_t *mutex, int *dest, int value);
 void	ft_putstr_fd(char *s, int fd);
 void	data_init(t_table *table, t_free **alloc);
-int		input_pars(t_table **table, char **argv, t_free **alloc);
+t_table	*input(char **argv, t_free **alloc);
+int		check_input(t_table *table);
 void	start_simulation(t_table *table);
 void	ft_clean(t_table **table);
 int		ft_strcmp(const char *s1, const char *s2);

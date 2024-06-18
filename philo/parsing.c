@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 15:46:03 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 10:22:06 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/18 21:36:02 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,42 +85,34 @@ int	ft_atoi(char *str, t_free **alloc)
 		return (0);
 	trimed_str = trim_str(str, alloc);
 	if (!trimed_str || trimed_str[0] == '-')
-		error1("wrong input\n", alloc);
+		return (0);
 	if (trimed_str[i] == '+')
 		i++;
 	while (trimed_str[i])
 	{
 		if (ft_isdigit(trimed_str[i]))
-			error1("wrong input\n", alloc);
+			return (0);
 		n = (n * 10) + (trimed_str[i] - 48);
 		if (n < 0)
-			error1("wrong input\n", alloc);
+			return (0);
 		i++;
 	}
 	ft_free_ptr(alloc, trimed_str);
 	return (n);
 }
 
-int	input_pars(t_table **table, char **argv, t_free **alloc)
+t_table	*input(char **argv, t_free **alloc)
 {
-	*(table) = ft_malloc(alloc, sizeof(t_table));
-	(*table)->philo_nbr = ft_atoi(argv[1], alloc);
-	if ((*table)->philo_nbr < 1 || (*table)->philo_nbr > 200)
-		return (1);
-	(*table)->t_to_die = ft_atoi(argv[2], alloc);
-	if ((*table)->t_to_die == 0)
-		return (1);
-	(*table)->t_to_eat = ft_atoi(argv[3], alloc);
-	if ((*table)->t_to_eat == 0)
-		return (1);
-	(*table)->t_to_sleep = ft_atoi(argv[4], alloc);
-	if ((*table)->t_to_sleep == 0)
-		return (1);
+	t_table	*table;
+
+	table = ft_malloc(alloc, sizeof(t_table));
+	table->philo_nbr = ft_atoi(argv[1], alloc);
+	table->t_to_die = ft_atoi(argv[2], alloc);
+	table->t_to_eat = ft_atoi(argv[3], alloc);
+	table->t_to_sleep = ft_atoi(argv[4], alloc);
 	if (argv[5] == NULL)
-		(*table)->limit_meals = -1;
+		table->limit_meals = -1;
 	else
-		(*table)->limit_meals = ft_atoi(argv[5], alloc);
-	if ((*table)->limit_meals == 0)
-		return (1);
-	return (0);
+		table->limit_meals = ft_atoi(argv[5], alloc);
+	return (table);
 }

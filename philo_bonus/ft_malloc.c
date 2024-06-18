@@ -6,7 +6,7 @@
 /*   By: yboutsli <yboutsli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:00:41 by yboutsli          #+#    #+#             */
-/*   Updated: 2024/06/13 10:25:00 by yboutsli         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:55:38 by yboutsli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,4 @@ void	ft_free_all(t_free **list_aloc)
 		free(current);
 		current = next;
 	}
-	*list_aloc = NULL;
 }
